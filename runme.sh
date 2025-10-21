@@ -67,6 +67,7 @@ sshh() {
         read -p "Would you like to set up SSH? (yes/no): " yn
         case $yn in
                 yes ) echo Setting up SSH...
+		sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
                 ;;
 
                 no ) echo Okay, will NOT set up SSH
@@ -82,7 +83,15 @@ prohib() {
 	echo "6: Please check User directories for Prohibited files. This includes"
 	echo ".mp3/mp4/jpeg/png/jpg/wav/flac/bmp, etc. Please ensure you have already"
 	echo "completed the forensic questions to avoid making them impossible!"
-	read -p "Enter anything to continue: " yn
+	read -p "Enter anything to continue & list any prohibited files: " yn
+	find /home | grep .mp3
+	find /home | grep .mov
+	find /home | grep .flac
+	find /home | grep .png
+	find /home | grep .jpg
+	find /home | grep .jpeg
+	find /home | grep .img
+	find /home | grep .bmp
 }
 
 update() {
