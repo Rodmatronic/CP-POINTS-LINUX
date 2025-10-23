@@ -88,9 +88,30 @@ prohib() {
 	find /home/ -type f -iregex '.*\.\(mp3\|mov\|flac\|png\|jpg\|jpeg\|img\|bmp\)$'
 }
 
+unauth() {
+	echo
+	echo "7: OphCrack and Wireshark should be removed from the system."
+	echo "Note that you may have to remove some games yourself. Programs"
+	echo "such as Gimp or InkScape should definitely remain installed."
+	echo "Also note that some games may have a 'gnome-' prefix before"
+	echo "their package names in apt."
+	read -p "Would you like to remove unauthorized software? (yes/no): " yn
+	case $yn in
+		yes ) echo Removing software...
+			sudo apt purge -y ophcrack* wireshark*
+		;;
+		no ) echo Okay, will NOT remove unathorized software.
+		;;
+		* ) echo Not a valid response. Please try again.
+			unauth
+		;;
+	esac
+
+}
+
 update() {
 	echo
-        echo "7: The system should be updated. This will use 'apt update' and"
+        echo "8: The system should be updated. This will use 'apt update' and"
         echo "'apt upgrade' to update the system packages. Please keep in mind"
 	echo "that YOU CANNOT use APT from another terminal during this"
 	echo "process."
@@ -104,7 +125,7 @@ update() {
                 no ) echo Okay, will NOT update.
                 ;;
                 * ) echo Not a valid response. Please try again.
-                apache
+                update
                 ;;
         esac
 }
@@ -117,4 +138,5 @@ users
 firewall
 sshh
 prohib
+unauth
 update
