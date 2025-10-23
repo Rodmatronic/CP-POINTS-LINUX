@@ -26,6 +26,7 @@ apache() {
 
 forensic() {
 	echo
+	echo "Welcome to the points script."
         echo "1: It is a good idea to check the Forensic questions before performing"
         echo "any tasks. This is to ensure nothing is mucked up, making them impossible."
         read -p "Enter anything to continue: " yn
@@ -84,14 +85,7 @@ prohib() {
 	echo ".mp3/mp4/jpeg/png/jpg/wav/flac/bmp, etc. Please ensure you have already"
 	echo "completed the forensic questions to avoid making them impossible!"
 	read -p "Enter anything to continue & list any prohibited files: " yn
-	find /home | grep .mp3
-	find /home | grep .mov
-	find /home | grep .flac
-	find /home | grep .png
-	find /home | grep .jpg
-	find /home | grep .jpeg
-	find /home | grep .img
-	find /home | grep .bmp
+	find /home/ -type f -iregex '.*\.\(mp3\|mov\|flac\|png\|jpg\|jpeg\|img\|bmp\)$'
 }
 
 update() {
